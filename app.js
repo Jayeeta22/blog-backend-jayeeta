@@ -1,14 +1,17 @@
 const express=require("express");
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 const app=express()
 app.use(cookieParser());
 const corsOptions ={
     origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
+    credentials:true,       //access-control-allow-credentials:true
     optionSuccessStatus:200,
  }
- 
+ app.use(fileUpload({
+    useTempFiles:true
+}))
  app.use(cors(corsOptions))
 const dotenv=require("dotenv")
 const port=process.env.PORT || 5000;
@@ -17,6 +20,8 @@ dotenv.config({path:"./config.env"})
 // required connection.js 
 require("./db/connection")
 require("./models/userSchema")
+require("./models/postSchema")
+
 
 // Link the router files
 app.use(require("./router/auth"))

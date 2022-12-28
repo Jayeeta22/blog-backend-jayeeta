@@ -2,20 +2,12 @@ const mongooes=require("mongoose")
 const bcrypt=require("bcryptjs")
 const jwt=require("jsonwebtoken")
 const userSchema=new mongooes.Schema({
-    name:{
-        type:String,
-        required:true
-    },
+    
     email:{
         type:String,
         required:true,
         unique:true
 
-    },
-    phone:{
-        type:Number,
-        required:true,
-        unique:true
     },
     password:{
         type:String,
@@ -53,5 +45,5 @@ userSchema.methods.generateAuthToken= async function(){
         console.log(err)
     }
 }
-const user=mongooes.model("user",userSchema);
-module.exports=user
+const users=mongooes.model("users",userSchema);
+module.exports=users
